@@ -1,33 +1,21 @@
 :root {
-  --nav-bg-dark: #444;
-  --blue: #007bff;
-  --indigo: #6610f2;
-  --purple: #6f42c1;
-  --pink: #e83e8c;
-  --red: #dc3545;
-  --orange: #fd7e14;
-  --yellow: #ffc107;
-  --bright-yellow: #e4d804;
-
-  --green: #28a745;
-  --teal: #20c997;
-  --cyan: #17a2b8;
   --white: #fff;
+  --light: #f8f9fa;
+  --dark: #343a40;
   --gray: #6c757d;
   --gray-light: #adadad;
   --gray-dark: #343a40;
-  --primary: #007bff;
-  --secondary: #6c757d;
-  --success: #28a745;
-  --info: #17a2b8;
-  --warning: #ffc107;
-  --danger: #dc3545;
-  --light: #f8f9fa;
-  --dark: #343a40;
+  --nav-bg-dark: #444;
+  --bright-yellow: #e4d804;
+  --overlay: rgba(0, 0, 0, 0.7);
+  --no-color: transparent;
 }
-
+body {
+  font-family: "Roboto", sans-serif;
+}
 nav {
   background-color: var(--nav-bg-dark) !important;
+  width: 100vw;
 }
 .logo {
   width: 150px;
@@ -36,15 +24,52 @@ nav {
   color: var(--bright-yellow) !important;
 }
 .search-input:focus {
+  color: var(--light);
   box-shadow: none;
   outline: none;
 }
 .submit-btn {
   color: var(--bright-yellow);
 }
-
 .bg-container {
   min-height: 100vh;
-  background-image: url("https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg");
-  background-size: cover;
+  width: 100vw;
+  position: relative;
+  background-image: linear-gradient(var(--overlay), var(--overlay));
+}
+.bg-image {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+}
+.hero-section {
+  padding-top: 10rem;
+}
+.main-h {
+  color: var(--light);
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin: 5rem 0 4rem;
+}
+.form-container {
+  margin: 0 0 5rem;
+}
+.movie-card-overlay {
+  color: var(--no-color);
+  transition: all 0.3s ease-in-out;
+}
+.movie-card-overlay:hover {
+  color: var(--light);
+  background-image: linear-gradient(to bottom, var(--overlay), var(--overlay));
+}
+.like-btn {
+  font-size: 1.5rem;
+  font-weight: 400;
+  width: 50px;
+  height: 50px;
+}
+.color-yellow {
+  color: var(--bright-yellow);
 }
