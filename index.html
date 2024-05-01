@@ -54,16 +54,13 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse mt-3" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mt-3 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <button class="nav-link active" aria-current="page">Home</button>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./movies.html">Movies</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./myFvourites.html">Favourites</a>
+              <button class="nav-link favourite">Favourites</button>
             </li>
           </ul>
           <form class="d-flex bg-dark border-light rounded-pill" role="search">
@@ -82,35 +79,53 @@
       </div>
     </nav>
     <main class="container-fluid p-0 bg-container">
-      <section
-        class="d-flex flex-column justify-content-center align-items-center ps-lg-5 pe-lg-5 hero-section"
-      >
-        <h1 class="text-center main-h">
-          Search Your Favourite <span class="color-yellow">Movies</span>,<br />
-          TV Shows & More.
-        </h1>
-        <form
-          class="w-25 d-flex justify-content-between bg-dark border-light rounded-pill form-container"
-          role="search"
+      <!-- START: home section -->
+      <div class="home-section">
+        <header
+          class="d-flex flex-column justify-content-center align-items-center ps-lg-5 pe-lg-5 hero-section"
         >
-          <input
-            class="bg-dark me-2 ps-3 flex-fill border-0 rounded-pill focus-ring search-input"
-            type="text"
-            value=""
-            placeholder="Search..."
-            aria-label="Search"
-          />
-          <button class="btn btn-dark rounded-pill submit-btn" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
-      </section>
-      <section class="movies-section">
+          <h1 class="text-center main-h">
+            Search Your Favourite
+            <span class="color-yellow">Movies</span>,<br />
+            TV Shows & More.
+          </h1>
+          <form
+            class="w-25 d-flex justify-content-between bg-dark border-light rounded-pill form-container"
+            role="search"
+          >
+            <input
+              class="bg-dark me-2 ps-3 flex-fill border-0 rounded-pill focus-ring search-input"
+              type="text"
+              value=""
+              placeholder="Search..."
+              aria-label="Search"
+            />
+            <button class="btn btn-dark rounded-pill submit-btn" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+        </header>
+        <section class="movies-section">
+          <div
+            class="row row-cols-1 row-cols-md-3 row-cols-lg-5 row-cols-xl-6 g-4 p-5"
+          ></div>
+        </section>
+      </div>
+
+      <!-- END: home section -->
+
+      <!-- START: movie details section -->
+      <section class="movie-details-container hide"></section>
+      <!-- END: movie details section -->
+
+      <!-- START: Favourite movies section -->
+      <section class="favourite-movies-container hide">
         <div
           class="row row-cols-1 row-cols-md-3 row-cols-lg-5 row-cols-xl-6 g-4 p-5"
         ></div>
       </section>
+      <!-- END: Favourite movies section -->
     </main>
-    <script src="./index.js"></script>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>

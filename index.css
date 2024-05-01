@@ -45,7 +45,10 @@ nav {
   height: 100%;
 }
 .hero-section {
-  padding-top: 10rem;
+  padding: 10rem 0 1rem;
+}
+.movie-details-container {
+  padding: 10rem 10rem;
 }
 .main-h {
   color: var(--light);
@@ -80,6 +83,48 @@ nav {
   height: 50px;
   border: none;
 }
+
+/* general classes */
 .color-yellow {
   color: var(--bright-yellow);
 }
+.hide {
+  display: none;
+}
+
+/* movie details page */
+.poster-container {
+  /* border: 2px solid red; */
+  width: 50%;
+}
+.back-btn {
+  font-size: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.back-btn:hover {
+  color: var(--bright-yellow);
+}
+
+.movie-details {
+  padding-right: 5rem;
+  text-align: justify;
+}
+.movie-title {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.movie-overview {
+  font-size: 1.5rem;
+}
+.movie-release-date{
+  font-size: 2rem;
+  font-weight: 600;
+}
+.rating{
+  font-size: 1.5rem;
+}
+.add-to-favourites-btn{
+
+}
+
