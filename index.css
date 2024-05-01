@@ -7,11 +7,23 @@
   --gray-dark: #343a40;
   --nav-bg-dark: #444;
   --bright-yellow: #e4d804;
-  --overlay: rgba(0, 0, 0, 0.7);
+  --overlay: rgba(0, 0, 0, 0.5);
   --no-color: transparent;
 }
 body {
   font-family: "Roboto", sans-serif;
+}
+
+/* Home section */
+h2 {
+  margin: 0 0 0 3rem;
+  font-weight: 600;
+}
+.color-yellow {
+  color: var(--bright-yellow);
+}
+.hide {
+  display: none;
 }
 nav {
   background-color: var(--nav-bg-dark) !important;
@@ -47,9 +59,6 @@ nav {
 .hero-section {
   padding: 10rem 0 1rem;
 }
-.movie-details-container {
-  padding: 10rem 10rem;
-}
 .main-h {
   color: var(--light);
   font-size: 3.5rem;
@@ -84,17 +93,11 @@ nav {
   border: none;
 }
 
-/* general classes */
-.color-yellow {
-  color: var(--bright-yellow);
-}
-.hide {
-  display: none;
-}
-
 /* movie details page */
+.movie-details-container {
+  padding: 10rem 10rem;
+}
 .poster-container {
-  /* border: 2px solid red; */
   width: 50%;
 }
 .back-btn {
@@ -105,7 +108,6 @@ nav {
 .back-btn:hover {
   color: var(--bright-yellow);
 }
-
 .movie-details {
   padding-right: 5rem;
   text-align: justify;
@@ -117,14 +119,24 @@ nav {
 .movie-overview {
   font-size: 1.5rem;
 }
-.movie-release-date{
+.movie-release-date {
   font-size: 2rem;
   font-weight: 600;
 }
-.rating{
+.rating {
   font-size: 1.5rem;
 }
-.add-to-favourites-btn{
 
+/* favourites sections */
+.favourite-movies-container {
+  padding: 10rem 1rem;
 }
-
+.dislike-btn {
+  background-color: var(--no-color);
+  color: var(--white);
+  font-size: 1.5rem;
+  font-weight: 400;
+  width: 50px;
+  height: 50px;
+  border: none;
+}

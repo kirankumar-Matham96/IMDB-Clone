@@ -7,19 +7,32 @@ const SEARCH_MOVIES_URL =
 let page = 1;
 
 let moviesList = [];
-const favouriteMovies = [];
+let favouriteMovies = [];
 const searchEl = document.querySelectorAll(".search-input");
 const favouriteMoviesNavEl = document.querySelector(".favourite");
+const homeNavEl = document.querySelector(".home");
+const moviesSectionEl = document.querySelector(".movies-section");
 const moviesContainerEl = document.querySelector(".movies-section .row");
 const homeSectionEl = document.querySelector(".home-section");
 const movieDetailsEl = document.querySelector(".movie-details-container");
+const favouriteMoviesSectionEl = document.querySelector(
+  ".favourite-movies-container"
+);
 const favouriteMoviesContainerEl = document.querySelector(
   ".favourite-movies-container .row"
 );
 
+function removeFromFavourites(movieId) {
+  favouriteMovies = favouriteMovies.filter((movie) => movie.id !== movieId);
+  localStorage.setItem("favourites", JSON.stringify(favouriteMovies));
+  renderFavouriteMovies();
+}
+
 function renderFavouriteMovies() {
+  favouriteMovies = JSON.parse(localStorage.getItem("favourites"));
   console.log({ favouriteMovies });
-  console.log(favouriteMoviesContainerEl);
+  // console.log(favouriteMoviesContainerEl);
+  debugger;
   favouriteMoviesContainerEl.innerHTML = "";
   favouriteMovies &&
     favouriteMovies.forEach((movie) => {
@@ -40,9 +53,9 @@ function renderFavouriteMovies() {
       ).getFullYear()}</small></p>
       <div class="d-flex justify-content-end">
       <button
-      class="btn btn-light d-flex justify-content-center align-items-center rounded-pill w-25 like-btn"
+      class="btn btn-light d-flex justify-content-center align-items-center rounded-pill w-25 dislike-btn"
       >
-      <i class="fa-regular fa-heart"></i>
+      <i class="fa-solid fa-heart-crack"></i>
       </button>
       </div>
       </div>
@@ -55,23 +68,37 @@ function renderFavouriteMovies() {
       });
 
       // console.log(columnEl.querySelector("button"));
-      const likeBtn = columnEl.querySelector("button");
-      likeBtn.addEventListener("click", (event) => {
+      const dislikeBtn = columnEl.querySelector("button");
+      dislikeBtn.addEventListener("click", (event) => {
         event.stopPropagation();
-        likeBtn.innerHTML = '<i class="fa-solid fa-heart"></i>';
-        likeBtn.classList.add("text-danger");
-        addToFavourite(movie.id);
+        dislikeBtn.innerHTML = '<i class="fa-solid fa-heart-crack"></i>';
+        dislikeBtn.classList.add("text-dark");
+        // addToFavourite(movie.id);
+        removeFromFavourites(movie.id);
       });
 
       // appending the element
-      moviesContainerEl.appendChild(columnEl);
+      favouriteMoviesContainerEl.appendChild(columnEl);
     });
 }
 
+homeNavEl.addEventListener("click", () => {
+  homeNavEl.classList.add("active");
+  favouriteMoviesNavEl.classList.remove("active");
+
+  homeSectionEl.classList.remove("hide");
+  movieDetailsEl.classList.add("hide");
+  favouriteMoviesSectionEl.classList.add("hide");
+  renderMovies();
+});
+
 favouriteMoviesNavEl.addEventListener("click", () => {
+  favouriteMoviesNavEl.classList.add("active");
+  homeNavEl.classList.remove("active");
+
   homeSectionEl.classList.add("hide");
   movieDetailsEl.classList.add("hide");
-  favouriteMoviesContainerEl.classList.remove("hide");
+  favouriteMoviesSectionEl.classList.remove("hide");
   renderFavouriteMovies();
 });
 
