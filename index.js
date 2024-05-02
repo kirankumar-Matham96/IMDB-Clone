@@ -65,19 +65,20 @@ function renderFavouriteMovies() {
       </div>
       </div>
       `;
-
+      
       // event listener for the movie card to show the details
       columnEl.addEventListener("click", () => {
-        showMovieDetails(movie.id);
+        // setting the selected movie details to the local storage
+        localStorage.setItem("movie", JSON.stringify(movie));
+        // to open the movieDetails page in the new tab
+        window.open('movieDetails.html?_blank');
       });
 
-      // console.log(columnEl.querySelector("button"));
       const dislikeBtn = columnEl.querySelector("button");
       dislikeBtn.addEventListener("click", (event) => {
         event.stopPropagation();
         dislikeBtn.innerHTML = '<i class="fa-solid fa-heart-crack"></i>';
         dislikeBtn.classList.add("text-dark");
-        // addToFavourite(movie.id);
         removeFromFavourites(movie.id);
       });
 
