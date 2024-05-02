@@ -2,6 +2,10 @@
 
 A simple movie search application that allows users to search for movies and view their details.
 
+## Visit Live Website
+
+  https://kirankumar-matham96.github.io/IMDB-Clone/
+
 ## Installation
 
   Clone or download this repository.
@@ -18,7 +22,6 @@ A simple movie search application that allows users to search for movies and vie
 - Cannot add the duplicate items to the favourite list.
 - View details of each movie, including title, description, ratings and release date.
 
-## Screenshots
+## Preview
 
-![Screenshot 1](/screenshots/screenshot1.png)
-![Screenshot 2](/screenshots/screenshot2.png)
+https://app.screencastify.com/v3/watch/uE9e7aHPeiExqy2DgOT6.mp4
