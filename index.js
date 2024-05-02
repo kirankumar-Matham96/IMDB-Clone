@@ -7,7 +7,7 @@ const SEARCH_MOVIES_URL =
 let page = 1;
 
 let moviesList = [];
-let favouriteMovies = [];
+let favouriteMovies = JSON.parse(localStorage.getItem("favourites")) || []; // getting the data from local storage if any
 const searchEl = document.querySelectorAll(".search-input");
 const favouriteMoviesNavEl = document.querySelector(".favourite");
 const homeNavEl = document.querySelector(".home");
@@ -65,7 +65,7 @@ function renderFavouriteMovies() {
       </div>
       </div>
       `;
-      
+
       // event listener for the movie card to show the details
       columnEl.addEventListener("click", () => {
         // setting the selected movie details to the local storage
@@ -92,9 +92,12 @@ function renderFavouriteMovies() {
  * @param {id of the movie selected} movieId
  */
 function addToFavourite(movieId) {
-  const movie = moviesList.find((movie) => movie.id === movieId);
-  favouriteMovies.push(movie);
-  localStorage.setItem("favourites", JSON.stringify(favouriteMovies));
+  const movieData = moviesList.find((movie) => movie.id === movieId);
+  const movieExists = favouriteMovies && favouriteMovies.find(movie => movie.id === movieData.id );
+  if(!movieExists){
+    favouriteMovies.push(movieData);
+    localStorage.setItem("favourites", JSON.stringify(favouriteMovies));
+  }
 }
 
 /**
@@ -123,13 +126,13 @@ function renderMovies() {
       <button
       class="btn btn-light d-flex justify-content-center align-items-center rounded-pill w-25 like-btn"
       >
-      <i class="fa-regular fa-heart"></i>
+      ${favouriteMovies.find(item => item.id === movie.id) ? '<i class="fa-solid fa-heart text-danger"></i>' : '<i class="fa-regular fa-heart"></i>'}
       </button>
       </div>
       </div>
       </div>
       `;
-
+      
       // event listener for the movie card to show the details
       columnEl.addEventListener("click", () => {
         // setting the selected movie details to the local storage
