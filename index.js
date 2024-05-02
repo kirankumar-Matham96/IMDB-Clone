@@ -3,7 +3,7 @@ const ACCESS_TOKEN =
 const MOVIES_URL =
   "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
 const SEARCH_MOVIES_URL =
-  "https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1";
+  "https://api.themoviedb.org/3/search/movie?include_adult=true&language=en-US&page=1";
 let page = 1;
 
 let moviesList = [];
@@ -22,12 +22,19 @@ const favouriteMoviesContainerEl = document.querySelector(
   ".favourite-movies-container .row"
 );
 
+/**
+ * to remove the movie from the favourites list
+ * @param {id of the movie} movieId 
+ */
 function removeFromFavourites(movieId) {
   favouriteMovies = favouriteMovies.filter((movie) => movie.id !== movieId);
   localStorage.setItem("favourites", JSON.stringify(favouriteMovies));
   renderFavouriteMovies();
 }
 
+/**
+ * to render the favourite movies
+ */
 function renderFavouriteMovies() {
   favouriteMovies = JSON.parse(localStorage.getItem("favourites"));
   console.log({ favouriteMovies });
@@ -81,26 +88,6 @@ function renderFavouriteMovies() {
       favouriteMoviesContainerEl.appendChild(columnEl);
     });
 }
-
-homeNavEl.addEventListener("click", () => {
-  homeNavEl.classList.add("active");
-  favouriteMoviesNavEl.classList.remove("active");
-
-  homeSectionEl.classList.remove("hide");
-  movieDetailsEl.classList.add("hide");
-  favouriteMoviesSectionEl.classList.add("hide");
-  renderMovies();
-});
-
-favouriteMoviesNavEl.addEventListener("click", () => {
-  favouriteMoviesNavEl.classList.add("active");
-  homeNavEl.classList.remove("active");
-
-  homeSectionEl.classList.add("hide");
-  movieDetailsEl.classList.add("hide");
-  favouriteMoviesSectionEl.classList.remove("hide");
-  renderFavouriteMovies();
-});
 
 /**
  * to add the movies to favourites
@@ -172,7 +159,9 @@ function renderSelectedMovieDetails(movieId) {
   });
 }
 
-// render the movie cards
+/**
+ * to render movies on the initial load and on search
+ */
 function renderMovies() {
   moviesContainerEl.innerHTML = "";
   moviesList &&
@@ -222,7 +211,10 @@ function renderMovies() {
     });
 }
 
-// search for the movies
+/**
+ * to search the movies
+ * @param {input value from the user} searchTerm 
+ */
 async function searchMovies(searchTerm = "") {
   try {
     const response = await fetch(`${SEARCH_MOVIES_URL}&query=${searchTerm}`, {
@@ -239,8 +231,9 @@ async function searchMovies(searchTerm = "") {
     console.log(error);
   }
 }
-
-// get the trending movies initially
+/**
+ * to get the data of movies on the initial page load
+ */
 async function getMovies() {
   try {
     const response = await fetch(MOVIES_URL, {
@@ -258,11 +251,39 @@ async function getMovies() {
   }
 }
 
+/**
+ * event listener to the search input
+ */
 searchEl.forEach((input) => {
   input.addEventListener("input", (event) => {
-    // const url = `${SEARCH_MOVIES_URL}&${event.target.value.toLowerCase().trim()}`;
     event.target.value != "" ? searchMovies(event.target.value) : getMovies();
   });
 });
 
+/**
+ * event listener to home button
+ */
+homeNavEl.addEventListener("click", () => {
+  homeNavEl.classList.add("active");
+  favouriteMoviesNavEl.classList.remove("active");
+
+  homeSectionEl.classList.remove("hide");
+  movieDetailsEl.classList.add("hide");
+  favouriteMoviesSectionEl.classList.add("hide");
+  renderMovies();
+});
+
+/**
+ * event listener to favourites button
+ */
+favouriteMoviesNavEl.addEventListener("click", () => {
+  favouriteMoviesNavEl.classList.add("active");
+  homeNavEl.classList.remove("active");
+  homeSectionEl.classList.add("hide");
+  movieDetailsEl.classList.add("hide");
+  favouriteMoviesSectionEl.classList.remove("hide");
+  renderFavouriteMovies();
+});
+
+// initial load
 getMovies();

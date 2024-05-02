@@ -67,6 +67,14 @@ nav {
 }
 .form-container {
   margin: 0 0 5rem;
+  box-shadow: 0 0 8px -2px var(--light);
+}
+.card {
+  box-shadow: 0 0 8px -2px var(--light);
+  transition: 0.2s ease-in-out;
+}
+.card:hover {
+  transform: scale(1.02, 1.02);
 }
 .movie-card-overlay {
   color: var(--no-color);
