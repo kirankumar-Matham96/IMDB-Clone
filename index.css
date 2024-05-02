@@ -16,7 +16,6 @@ body {
 
 /* Home section */
 h2 {
-  margin: 0 0 0 3rem;
   font-weight: 600;
 }
 .color-yellow {
@@ -103,7 +102,8 @@ nav {
 
 /* movie details page */
 .movie-details-container {
-  padding: 10rem 10rem;
+  background-image: linear-gradient(var(--overlay), var(--overlay));
+  padding: 2rem 10rem;
 }
 .poster-container {
   width: 50%;

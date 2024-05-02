@@ -37,9 +37,6 @@ function removeFromFavourites(movieId) {
  */
 function renderFavouriteMovies() {
   favouriteMovies = JSON.parse(localStorage.getItem("favourites"));
-  console.log({ favouriteMovies });
-  // console.log(favouriteMoviesContainerEl);
-  debugger;
   favouriteMoviesContainerEl.innerHTML = "";
   favouriteMovies &&
     favouriteMovies.forEach((movie) => {
@@ -93,70 +90,10 @@ function renderFavouriteMovies() {
  * to add the movies to favourites
  * @param {id of the movie selected} movieId
  */
-// add the movies to favourites
 function addToFavourite(movieId) {
   const movie = moviesList.find((movie) => movie.id === movieId);
   favouriteMovies.push(movie);
   localStorage.setItem("favourites", JSON.stringify(favouriteMovies));
-}
-
-/**
- * to toggle the sections and render the selected movie details
- * @param {id of the movie selected} movieId
- */
-function showMovieDetails(movieId) {
-  homeSectionEl.classList.add("hide");
-  movieDetailsEl.classList.remove("hide");
-  renderSelectedMovieDetails(movieId);
-}
-
-/**
- * to render individual movie details
- * @param {id of the movie selected} movieId
- */
-function renderSelectedMovieDetails(movieId) {
-  debugger;
-  const movie = moviesList.find((movie) => movie.id === movieId);
-  console.log({ movie });
-  const movieDetailsContainerEl = document.querySelector(
-    ".movie-details-container"
-  );
-
-  movieDetailsContainerEl.innerHTML = `
-  <button class="btn btn-dark rounded-pill mb-4 d-flex justify-content-center align-items-center back-btn">
-    <i class="fa-solid fa-arrow-left"></i>
-  </button>
-  <div  class="d-flex justify-content-center">
-    <div class="d-flex justify-content-center poster-container">
-      <img
-      src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
-      alt="${movie.title}"
-      class="movie-poster"
-      />
-    </div>
-    <div class="text-light w-50 movie-details">
-      <h2 class="movie-title">${movie.title}</h2>
-      <p class="movie-release-date">${new Date(
-        movie.release_date
-      ).getFullYear()}</p>
-      <div class="rating">Rating: ${parseFloat(movie.vote_average).toFixed(
-        1
-      )} / 10</div>
-      <button class="btn btn-dark rounded-fill add-to-favourites-btn">❤</button>
-      <p class="mt-4 movie-overview">${movie.overview}</p>
-    </div>
-  </div>`;
-  const backBtn = document.querySelector(".back-btn");
-  backBtn.addEventListener("click", () => {
-    movieDetailsEl.classList.add("hide");
-    homeSectionEl.classList.remove("hide");
-  });
-
-  const addToFavouriteBtn = document.querySelector(".add-to-favourites-btn");
-  addToFavouriteBtn.addEventListener("click", () => {
-    addToFavouriteBtn.classList.add("text-danger");
-    addToFavourite(movie.id);
-  });
 }
 
 /**
@@ -194,10 +131,12 @@ function renderMovies() {
 
       // event listener for the movie card to show the details
       columnEl.addEventListener("click", () => {
-        showMovieDetails(movie.id);
+        // setting the selected movie details to the local storage
+        localStorage.setItem("movie", JSON.stringify(movie));
+        // to open the movieDetails page in the new tab
+        window.open('movieDetails.html?_blank');
       });
 
-      // console.log(columnEl.querySelector("button"));
       const likeBtn = columnEl.querySelector("button");
       likeBtn.addEventListener("click", (event) => {
         event.stopPropagation();
@@ -266,9 +205,7 @@ searchEl.forEach((input) => {
 homeNavEl.addEventListener("click", () => {
   homeNavEl.classList.add("active");
   favouriteMoviesNavEl.classList.remove("active");
-
   homeSectionEl.classList.remove("hide");
-  movieDetailsEl.classList.add("hide");
   favouriteMoviesSectionEl.classList.add("hide");
   renderMovies();
 });
@@ -280,7 +217,6 @@ favouriteMoviesNavEl.addEventListener("click", () => {
   favouriteMoviesNavEl.classList.add("active");
   homeNavEl.classList.remove("active");
   homeSectionEl.classList.add("hide");
-  movieDetailsEl.classList.add("hide");
   favouriteMoviesSectionEl.classList.remove("hide");
   renderFavouriteMovies();
 });
