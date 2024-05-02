@@ -9,6 +9,7 @@ let page = 1;
 let moviesList = [];
 let favouriteMovies = JSON.parse(localStorage.getItem("favourites")) || []; // getting the data from local storage if any
 const searchEl = document.querySelectorAll(".search-input");
+const formEl = document.querySelectorAll(".form");
 const favouriteMoviesNavEl = document.querySelector(".favourite");
 const homeNavEl = document.querySelector(".home");
 const moviesSectionEl = document.querySelector(".movies-section");
@@ -200,6 +201,15 @@ async function getMovies() {
 searchEl.forEach((input) => {
   input.addEventListener("input", (event) => {
     event.target.value != "" ? searchMovies(event.target.value) : getMovies();
+  });
+});
+
+/**
+ * event listener to the form element to prevent unwanted submission
+ */
+formEl.forEach((form) => {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
   });
 });
 
