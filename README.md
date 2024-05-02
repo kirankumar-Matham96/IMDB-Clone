@@ -17,11 +17,7 @@ A simple movie search application that allows users to search for movies and vie
 ## Features
 
 - Search for movies by title.
-- Movies will be updated dynamically as user typing in the search box.
-- Add/remove any movie to/from your favourite list. This list will be persisting.
-- Cannot add the duplicate items to the favourite list.
-- View details of each movie, including title, description, ratings and release date.
-
-## Preview
-
-https://app.screencastify.com/v3/watch/uE9e7aHPeiExqy2DgOT6.mp4
+- Movies will be updated dynamically as the user types in the search box.
+- Add/remove any movie to/from your favorite list. This list will persist.
+- Cannot add duplicate items to the favorite list.
+- View details of each movie, including title, description, ratings, and release date.
