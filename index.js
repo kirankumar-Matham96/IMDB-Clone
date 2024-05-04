@@ -4,8 +4,8 @@ const MOVIES_URL =
   "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
 const SEARCH_MOVIES_URL =
   "https://api.themoviedb.org/3/search/movie?include_adult=true&language=en-US&page=1";
-let page = 1;
 
+let page = 1;
 let moviesList = [];
 let favouriteMovies = JSON.parse(localStorage.getItem("favourites")) || []; // getting the data from local storage if any
 const searchEl = document.querySelectorAll(".search-input");
@@ -24,8 +24,23 @@ const favouriteMoviesContainerEl = document.querySelector(
 );
 
 /**
+ * to add the movies to favourites
+ * @param {id of the movie selected} movieId
+ */
+function addToFavourite(movieId) {
+  const movieData = moviesList.find((movie) => movie.id === movieId);
+  const movieExists =
+    favouriteMovies &&
+    favouriteMovies.find((movie) => movie.id === movieData.id);
+  if (!movieExists) {
+    favouriteMovies.push(movieData);
+    localStorage.setItem("favourites", JSON.stringify(favouriteMovies));
+  }
+}
+
+/**
  * to remove the movie from the favourites list
- * @param {id of the movie} movieId 
+ * @param {id of the movie} movieId
  */
 function removeFromFavourites(movieId) {
   favouriteMovies = favouriteMovies.filter((movie) => movie.id !== movieId);
@@ -72,7 +87,7 @@ function renderFavouriteMovies() {
         // setting the selected movie details to the local storage
         localStorage.setItem("movie", JSON.stringify(movie));
         // to open the movieDetails page in the new tab
-        window.open('movieDetails.html?_blank');
+        window.open("movieDetails.html?_blank");
       });
 
       const dislikeBtn = columnEl.querySelector("button");
@@ -86,19 +101,6 @@ function renderFavouriteMovies() {
       // appending the element
       favouriteMoviesContainerEl.appendChild(columnEl);
     });
-}
-
-/**
- * to add the movies to favourites
- * @param {id of the movie selected} movieId
- */
-function addToFavourite(movieId) {
-  const movieData = moviesList.find((movie) => movie.id === movieId);
-  const movieExists = favouriteMovies && favouriteMovies.find(movie => movie.id === movieData.id );
-  if(!movieExists){
-    favouriteMovies.push(movieData);
-    localStorage.setItem("favourites", JSON.stringify(favouriteMovies));
-  }
 }
 
 /**
@@ -127,19 +129,23 @@ function renderMovies() {
       <button
       class="btn btn-light d-flex justify-content-center align-items-center rounded-pill w-25 like-btn"
       >
-      ${favouriteMovies.find(item => item.id === movie.id) ? '<i class="fa-solid fa-heart text-danger"></i>' : '<i class="fa-regular fa-heart"></i>'}
+      ${
+        favouriteMovies.find((item) => item.id === movie.id)
+          ? '<i class="fa-solid fa-heart text-danger"></i>'
+          : '<i class="fa-regular fa-heart"></i>'
+      }
       </button>
       </div>
       </div>
       </div>
       `;
-      
+
       // event listener for the movie card to show the details
       columnEl.addEventListener("click", () => {
         // setting the selected movie details to the local storage
         localStorage.setItem("movie", JSON.stringify(movie));
         // to open the movieDetails page in the new tab
-        window.open('movieDetails.html?_blank');
+        window.open("movieDetails.html?_blank");
       });
 
       const likeBtn = columnEl.querySelector("button");
@@ -157,7 +163,7 @@ function renderMovies() {
 
 /**
  * to search the movies
- * @param {input value from the user} searchTerm 
+ * @param {input value from the user} searchTerm
  */
 async function searchMovies(searchTerm = "") {
   try {
@@ -175,6 +181,7 @@ async function searchMovies(searchTerm = "") {
     console.log(error);
   }
 }
+
 /**
  * to get the data of movies on the initial page load
  */
