@@ -221,6 +221,8 @@ searchEl.forEach((input) => {
  */
 navSubmitBtn.addEventListener("click", (event) => {
   const inputValue = document.querySelector("#nav-input").value;
+  // clearing the main search for consistency
+  document.querySelector("#main-input").value = "";
   inputValue != "" ? searchMovies(inputValue) : getMovies();
 });
 
@@ -229,6 +231,8 @@ navSubmitBtn.addEventListener("click", (event) => {
  */
 mainSubmitBtn.addEventListener("click", (event) => {
   const inputValue = document.querySelector("#main-input").value;
+  // clearing the nav search for consistency
+  document.querySelector("#nav-input").value = "";
   inputValue != "" ? searchMovies(inputValue) : getMovies();
 });
 
