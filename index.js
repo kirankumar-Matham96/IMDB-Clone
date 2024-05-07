@@ -22,6 +22,11 @@ const favouriteMoviesSectionEl = document.querySelector(
 const favouriteMoviesContainerEl = document.querySelector(
   ".favourite-movies-container .row"
 );
+const submitBtn = document.querySelectorAll(".submit-btn");
+const navSubmitBtn = document.querySelector("#nav-search-submit-btn");
+const mainSubmitBtn = document.querySelector("#main-search-submit-btn");
+const navInputEl = document.querySelector("#nav-input");
+const mainInputEl = document.querySelector("#main-input");
 
 /**
  * to add the movies to favourites
@@ -209,6 +214,22 @@ searchEl.forEach((input) => {
   input.addEventListener("input", (event) => {
     event.target.value != "" ? searchMovies(event.target.value) : getMovies();
   });
+});
+
+/**
+ * event listener to the submit button with in the navbar search
+ */
+navSubmitBtn.addEventListener("click", (event) => {
+  const inputValue = document.querySelector("#nav-input").value;
+  inputValue != "" ? searchMovies(inputValue) : getMovies();
+});
+
+/**
+ * event listener to the submit button with in the main search
+ */
+mainSubmitBtn.addEventListener("click", (event) => {
+  const inputValue = document.querySelector("#main-input").value;
+  inputValue != "" ? searchMovies(inputValue) : getMovies();
 });
 
 /**
