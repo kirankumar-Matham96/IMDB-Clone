@@ -22,7 +22,7 @@ h2 {
   color: var(--bright-yellow);
 }
 .hide {
-  display: none;
+  display: none !important;
 }
 nav {
   background-color: var(--nav-bg-dark) !important;
@@ -39,8 +39,11 @@ nav {
   box-shadow: none;
   outline: none;
 }
-.submit-btn {
+.clear-btn {
   color: var(--bright-yellow);
+  /* min-width: 1rem !important; */
+  padding: 0 20px;
+  font-size: 1.5rem;
 }
 .bg-container {
   min-height: 100vh;
@@ -107,14 +110,6 @@ nav {
 }
 .poster-container {
   width: 50%;
-}
-.back-btn {
-  font-size: 2rem;
-  width: 3.5rem;
-  height: 3.5rem;
-}
-.back-btn:hover {
-  color: var(--bright-yellow);
 }
 .movie-details {
   padding-right: 5rem;

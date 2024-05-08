@@ -22,11 +22,10 @@ const favouriteMoviesSectionEl = document.querySelector(
 const favouriteMoviesContainerEl = document.querySelector(
   ".favourite-movies-container .row"
 );
-const submitBtn = document.querySelectorAll(".submit-btn");
-const navSubmitBtn = document.querySelector("#nav-search-submit-btn");
-const mainSubmitBtn = document.querySelector("#main-search-submit-btn");
 const navInputEl = document.querySelector("#nav-input");
 const mainInputEl = document.querySelector("#main-input");
+const navClearBtn = document.querySelector("#nav-clear-btn");
+const mainClearBtn = document.querySelector("#main-clear-btn");
 
 /**
  * to add the movies to favourites
@@ -216,24 +215,18 @@ searchEl.forEach((input) => {
   });
 });
 
-/**
- * event listener to the submit button with in the navbar search
- */
-navSubmitBtn.addEventListener("click", (event) => {
-  const inputValue = document.querySelector("#nav-input").value;
-  // clearing the main search for consistency
-  document.querySelector("#main-input").value = "";
-  inputValue != "" ? searchMovies(inputValue) : getMovies();
+navInputEl.addEventListener("input", (event) => {
+  if (event.target.value != "") {
+    navClearBtn.classList.remove("hide");
+    searchMovies(event.target.value);
+  }
 });
 
-/**
- * event listener to the submit button with in the main search
- */
-mainSubmitBtn.addEventListener("click", (event) => {
-  const inputValue = document.querySelector("#main-input").value;
-  // clearing the nav search for consistency
-  document.querySelector("#nav-input").value = "";
-  inputValue != "" ? searchMovies(inputValue) : getMovies();
+mainInputEl.addEventListener("input", (event) => {
+  if (event.target.value != "") {
+    mainClearBtn.classList.remove("hide");
+    searchMovies(event.target.value);
+  }
 });
 
 /**
@@ -243,6 +236,32 @@ formEl.forEach((form) => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
   });
+});
+
+/**
+ * event listener to the navbar search clear button
+ */
+navClearBtn.addEventListener("click", () => {
+  // clearing both the search boxes
+  navInputEl.value = "";
+  mainInputEl.value = "";
+  // hiding the clear button
+  navClearBtn.classList.add("hide");
+  // rendering the default trending movies
+  getMovies();
+});
+
+/**
+ * event listener to the main search clear button
+ */
+mainClearBtn.addEventListener("click", () => {
+  // clearing both the search boxes
+  navInputEl.value = "";
+  mainInputEl.value = "";
+  // hiding the clear button
+  mainClearBtn.classList.add("hide");
+  // rendering the default trending movies
+  getMovies();
 });
 
 /**
