@@ -18,10 +18,9 @@ Open the index.html in the browser or open it with the live server.
 
 - Search for movies by title.
 - Movies will be updated dynamically as the user types in the search box.
+- On interacting with the search inputs, a close button will be visible.
+- By clicking the close button, it will clear the search box and render the trending movies.
+- Both the search boxes are in sync.
 - Add/remove any movie to/from your favorite list. This list will persist.
 - Cannot add duplicate items to the favorite list.
 - View details of each movie, including title, description, ratings, and release date.
-
-## NOTE
-
-- After searching for some words in any of the search, if the user clicks on submit button in the other search, the former search will get cleared and trending movies will load as default.
